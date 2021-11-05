@@ -1,6 +1,7 @@
 package com.example.shollinglist_day2_22
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -24,6 +25,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.fab.setOnClickListener {
             startActivityForResult(Intent(this, SecondActivity::class.java), REQUEST_CODE)
+        }
+
+        binding.buttonMap.setOnClickListener {
+            val shop = binding.editText.toString()
+            val locShop = Uri.parse("geo:0,0?q=$shop")
+            val intent = Intent(Intent.ACTION_VIEW, locShop)
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            }
         }
     }
 
